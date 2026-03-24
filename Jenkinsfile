@@ -1,25 +1,26 @@
 pipeline {
-    agent any
+   agent any
 
-    stages {
+   stages {
 
-        stage('Clone Code') {
-            steps {
-                git branch: 'main', url: 'https://github.com/mythili2392/Jen-doc-cicd.git'
-            }
-        }
+       stage('Build Docker Image') {
+           steps {
+               sh 'docker build -t cobol-app .'
+           }
+       }
 
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t cobol-app .'
-            }
-        }
+       stage('Stop Old Container') {
+           steps {
+               sh 'docker rm -f cobol-container || true'
+           }
+       }
 
-        stage('Run Container') {
-            steps {
-                sh 'docker run --rm cobol-app'
-            }
-        }
+       stage('Run Container') {
+           steps {
+               sh 'docker run -d -p 8081:8081 --name cobol-container cobol-app'
+           }
+       }
 
-    }
+   }
 }
+
