@@ -1,0 +1,9 @@
+IDENTIFICATION DIVISION.
+      PROGRAM-ID. HELLO.
+
+      DATA DIVISION.
+
+      PROCEDURE DIVISION.
+          DISPLAY "Hello from COBOL CI/CD Pipeline!".
+          DISPLAY "uSING DOCKER AND JENKINS".
+          STOP RUN.
